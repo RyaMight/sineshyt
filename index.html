@@ -3,877 +3,628 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECOPEDIA - Edukasi Pencemaran Tanah oleh Barang Elektronik</title>
+    <title>ECOPEDIA - Edukasi Pencemaran Tanah Elektronik</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-blue': '#3B82F6',
+                        'custom-pink': '#EC4899',
+                        'custom-cream': '#FEF3C7'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        .gradient-bg {
+            background: linear-gradient(135deg, #3B82F6 0%, #EC4899 50%, #FEF3C7 100%);
         }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #000000;
-            line-height: 1.6;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header Styles */
-        header {
-            background: linear-gradient(135deg, #1e90ff, #ff69b4, #f5f5dc);
-            padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo img {
-            height: 60px;
-            margin-right: 15px;
-        }
-        
-        .logo-text h1 {
-            font-size: 24px;
-            color: #000;
-            font-weight: 700;
-        }
-        
-        .logo-text p {
-            font-size: 14px;
-            color: #000;
-        }
-        
-        /* Navigation Styles */
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin-left: 20px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: #000;
-            font-weight: 600;
-            padding: 8px 12px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        nav ul li a:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(30, 144, 255, 0.8), rgba(255, 105, 180, 0.8), rgba(245, 245, 220, 0.8));
-            padding: 80px 0;
-            text-align: center;
-            color: #000;
-        }
-        
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            background-color: #1e90ff;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn:hover {
-            background-color: #187bcd;
-            transform: translateY(-3px);
-        }
-        
-        /* Content Sections */
-        .section {
-            padding: 60px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        
-        .section-title h2 {
-            font-size: 32px;
-            color: #333;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 10px;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(to right, #1e90ff, #ff69b4);
-        }
-        
-        /* Home Content */
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .feature-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-card i {
-            font-size: 40px;
-            color: #1e90ff;
-            margin-bottom: 20px;
-        }
-        
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 40px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-        
-        .footer-column h3 {
-            font-size: 20px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 2px;
-            background-color: #1e90ff;
-        }
-        
-        .footer-column p, .footer-column a {
-            color: #ddd;
-            margin-bottom: 10px;
-            display: block;
-            text-decoration: none;
-        }
-        
-        .footer-column a:hover {
-            color: #1e90ff;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .social-links a {
-            color: white;
-            background-color: #444;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background-color: #1e90ff;
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #444;
-        }
-        
-        /* Page Content Styles (hidden by default) */
-        .page-content {
+        .section-hidden {
             display: none;
         }
-        
-        .active-page {
+        .section-active {
             display: block;
-        }
-        
-        /* Profile Page */
-        .profile-content {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .profile-image {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .profile-image img {
-            width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .profile-text {
-            flex: 2;
-            min-width: 300px;
-        }
-        
-        /* Information Page */
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .info-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .info-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .info-card-content {
-            padding: 20px;
-        }
-        
-        .info-card h3 {
-            margin-bottom: 15px;
-            color: #333;
-        }
-        
-        /* Video Page */
-        .video-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .video-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-        }
-        
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        
-        .video-info {
-            padding: 20px;
-        }
-        
-        /* Photo Gallery */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-        
-        .photo-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            height: 250px;
-        }
-        
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .photo-item:hover img {
-            transform: scale(1.1);
-        }
-        
-        .photo-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .photo-item:hover .photo-caption {
-            transform: translateY(0);
-        }
-        
-        /* Contact Page */
-        .contact-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-        }
-        
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .contact-info h3 {
-            margin-bottom: 20px;
-            color: #333;
-        }
-        
-        .contact-details {
-            margin-bottom: 30px;
-        }
-        
-        .contact-detail {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-        }
-        
-        .contact-detail i {
-            margin-right: 15px;
-            color: #1e90ff;
-            font-size: 20px;
-        }
-        
-        .contact-form {
-            flex: 1;
-            min-width: 300px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background-color: #1e90ff;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .submit-btn:hover {
-            background-color: #187bcd;
-        }
-        
-        /* Map */
-        .map-container {
-            height: 400px;
-            margin-top: 30px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .map-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            nav ul {
-                margin-top: 20px;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 0 10px;
-            }
-            
-            .hero h2 {
-                font-size: 28px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .section-title h2 {
-                font-size: 28px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .logo {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .logo img {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-            }
-            
-            nav ul li {
-                margin: 5px;
-            }
-            
-            .hero {
-                padding: 60px 0;
-            }
-            
-            .hero h2 {
-                font-size: 24px;
-            }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body>
-    <!-- Header Section -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <img src="https://smkn1bantul.sch.id/logo.png" alt="ECOPEDIA Logo">
-                <div class="logo-text">
-                    <h1>ECOPEDIA</h1>
-                    <p>Arya Saputra Nugraha</p>
+<body class="bg-gray-50 text-black">
+    <!-- Navigation -->
+    <nav class="gradient-bg shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <img src="https://smkn1bantul.sch.id/logo.png" alt="Logo" class="h-10 w-10 rounded-full bg-white p-1">
+                    <div>
+                        <h1 class="text-xl font-bold text-white">ECOPEDIA</h1>
+                        <p class="text-xs text-white opacity-90">ARYA SAPUTRA NUGRAHA</p>
+                    </div>
                 </div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#" onclick="showPage('home')">Beranda</a></li>
-                    <li><a href="#" onclick="showPage('profile')">Profil</a></li>
-                    <li><a href="#" onclick="showPage('information')">Informasi</a></li>
-                    <li><a href="#" onclick="showPage('video')">Video</a></li>
-                    <li><a href="#" onclick="showPage('gallery')">Galeri Foto</a></li>
-                    <li><a href="#" onclick="showPage('contact')">Kontak</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h2>Selamat Datang di ECOPEDIA</h2>
-            <p>Platform edukasi dan promosi untuk mengatasi masalah pencemaran tanah oleh barang elektronik. Mari bersama-sama menjaga bumi kita untuk generasi mendatang.</p>
-            <a href="#" class="btn" onclick="showPage('information')">Pelajari Lebih Lanjut</a>
-        </div>
-    </section>
-
-    <!-- Home Page Content -->
-    <section id="home" class="page-content active-page">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Mengapa ECOPEDIA Penting?</h2>
-            </div>
-            <div class="features">
-                <div class="feature-card">
-                    <i class="fas fa-recycle"></i>
-                    <h3>Daur Ulang Elektronik</h3>
-                    <p>Pelajari cara mendaur ulang limbah elektronik dengan benar untuk mengurangi pencemaran tanah.</p>
+                <div class="hidden md:flex space-x-6">
+                    <button onclick="showSection('home')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Home</button>
+                    <button onclick="showSection('profil')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Profil</button>
+                    <button onclick="showSection('informasi')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Informasi</button>
+                    <button onclick="showSection('video')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Video</button>
+                    <button onclick="showSection('galeri')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Galeri</button>
+                    <button onclick="showSection('alamat')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Alamat</button>
+                    <button onclick="showSection('kontak')" class="nav-btn text-white hover:text-custom-cream transition-colors px-3 py-2 rounded-md">Kontak</button>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>Data Pencemaran</h3>
-                    <p>Informasi terbaru tentang dampak limbah elektronik terhadap lingkungan dan kesehatan.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-hands-helping"></i>
-                    <h3>Solusi Bersama</h3>
-                    <p>Temukan cara untuk berkontribusi dalam mengurangi pencemaran tanah oleh elektronik.</p>
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-white">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Profile Page Content -->
-    <section id="profile" class="page-content">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Profil ECOPEDIA</h2>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-black bg-opacity-20 backdrop-blur-sm">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <button onclick="showSection('home')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Home</button>
+                <button onclick="showSection('profil')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Profil</button>
+                <button onclick="showSection('informasi')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Informasi</button>
+                <button onclick="showSection('video')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Video</button>
+                <button onclick="showSection('galeri')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Galeri</button>
+                <button onclick="showSection('alamat')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Alamat</button>
+                <button onclick="showSection('kontak')" class="block text-white hover:text-custom-cream px-3 py-2 rounded-md w-full text-left">Kontak</button>
             </div>
-            <div class="profile-content">
-                <div class="profile-image">
-                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Profil ECOPEDIA">
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section-active min-h-screen">
+        <div class="gradient-bg py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <img src="https://smkn1bantul.sch.id/logo.png" alt="Logo ECOPEDIA" class="mx-auto h-24 w-24 rounded-full bg-white p-2 mb-8">
+                <h1 class="text-5xl font-bold text-white mb-4">ECOPEDIA</h1>
+                <p class="text-xl text-white mb-2">Edukasi Pencemaran Tanah oleh Limbah Elektronik</p>
+                <p class="text-lg text-white opacity-90 mb-8">by ARYA SAPUTRA NUGRAHA</p>
+                <button onclick="showSection('informasi')" class="bg-white text-custom-blue px-8 py-3 rounded-full font-semibold hover:bg-custom-cream transition-colors">
+                    Mulai Belajar
+                </button>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-custom-blue">
+                    <div class="text-4xl mb-4">🌍</div>
+                    <h3 class="text-xl font-bold mb-3 text-black">Masalah Lingkungan</h3>
+                    <p class="text-gray-700">Limbah elektronik menjadi ancaman serius bagi kesehatan tanah dan lingkungan kita.</p>
                 </div>
-                <div class="profile-text">
-                    <h3>Tentang Kami</h3>
-                    <p>ECOPEDIA adalah platform edukasi yang didirikan oleh Arya Saputra Nugraha dengan tujuan meningkatkan kesadaran masyarakat tentang bahaya pencemaran tanah oleh limbah elektronik dan memberikan solusi praktis untuk mengatasinya.</p>
-                    <p>Kami percaya bahwa setiap individu memiliki peran penting dalam menjaga kelestarian lingkungan. Melalui website ini, kami menyediakan informasi, tips, dan sumber daya untuk membantu masyarakat memahami dan mengambil tindakan terhadap masalah pencemaran tanah oleh barang elektronik.</p>
-                    <h3>Visi dan Misi</h3>
-                    <p><strong>Visi:</strong> Menciptakan masyarakat yang sadar dan aktif dalam mengelola limbah elektronik untuk bumi yang lebih bersih dan sehat.</p>
-                    <p><strong>Misi:</strong> Menyebarkan pengetahuan tentang dampak limbah elektronik, memberikan solusi praktis, dan membangun jaringan kolaborasi untuk pengelolaan limbah elektronik yang bertanggung jawab.</p>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-custom-pink">
+                    <div class="text-4xl mb-4">📱</div>
+                    <h3 class="text-xl font-bold mb-3 text-black">E-Waste</h3>
+                    <p class="text-gray-700">Perangkat elektronik mengandung bahan berbahaya yang dapat mencemari tanah.</p>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-400">
+                    <div class="text-4xl mb-4">♻️</div>
+                    <h3 class="text-xl font-bold mb-3 text-black">Solusi</h3>
+                    <p class="text-gray-700">Mari belajar cara mengatasi dan mencegah pencemaran tanah dari limbah elektronik.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Information Page Content -->
-    <section id="information" class="page-content">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Informasi Pencemaran Tanah oleh Barang Elektronik</h2>
+    <!-- Profil Section -->
+    <section id="profil" class="section-hidden min-h-screen py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Profil</h2>
+                <div class="w-24 h-1 bg-custom-pink mx-auto"></div>
             </div>
-            <div class="info-cards">
-                <div class="info-card">
-                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Dampak Limbah Elektronik">
-                    <div class="info-card-content">
-                        <h3>Dampak Limbah Elektronik pada Tanah</h3>
-                        <p>Barang elektronik mengandung berbagai bahan berbahaya seperti timbal, merkuri, kadmium, dan bahan kimia beracun lainnya yang dapat mencemari tanah ketika dibuang sembarangan.</p>
-                        <p>Pencemaran ini dapat bertahan selama puluhan tahun dan mempengaruhi ekosistem serta kesehatan manusia melalui rantai makanan.</p>
+            
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-48 h-48 bg-gradient-to-br from-custom-blue to-custom-pink rounded-full flex items-center justify-center">
+                        <span class="text-6xl text-white">👨‍🎓</span>
                     </div>
-                </div>
-                <div class="info-card">
-                    <img src="https://images.unsplash.com/photo-1585314062604-1a357de8b000?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Solusi Daur Ulang">
-                    <div class="info-card-content">
-                        <h3>Solusi Daur Ulang yang Tepat</h3>
-                        <p>Daur ulang elektronik yang benar dapat memulihkan hingga 95% material yang dapat digunakan kembali dan mencegah bahan berbahaya mencemari lingkungan.</p>
-                        <p>Temukan pusat daur ulang terdekat di daerah Anda dan pelajari cara memilah limbah elektronik dengan benar.</p>
-                    </div>
-                </div>
-                <div class="info-card">
-                    <img src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pencegahan Pencemaran">
-                    <div class="info-card-content">
-                        <h3>Langkah Pencegahan Pencemaran</h3>
-                        <p>1. Gunakan perangkat elektronik hingga masa pakainya habis</p>
-                        <p>2. Donasikan atau jual kembali perangkat yang masih berfungsi</p>
-                        <p>3. Gunakan layanan take-back dari produsen</p>
-                        <p>4. Bawa ke fasilitas daur ulang resmi</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Video Page Content -->
-    <section id="video" class="page-content">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Video Edukasi</h2>
-            </div>
-            <div class="video-gallery">
-                <div class="video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/S2lmPIa1iWE" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>Dampak Limbah Elektronik pada Lingkungan</h3>
-                        <p>Video ini menjelaskan bagaimana limbah elektronik dapat mencemari tanah dan air, serta dampaknya terhadap ekosistem.</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/6Q7KxL5Rk4g" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>Proses Daur Ulang Barang Elektronik</h3>
-                        <p>Lihat bagaimana barang elektronik didaur ulang secara profesional untuk memulihkan material berharga dan menangani bahan berbahaya.</p>
-                    </div>
-                </div>
-                <div class="video-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/V44pR2x1ZkE" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="video-info">
-                        <h3>Cara Mengurangi Limbah Elektronik di Rumah</h3>
-                        <p>Tips praktis untuk mengurangi limbah elektronik dari rumah Anda dan berkontribusi pada lingkungan yang lebih bersih.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Page Content -->
-    <section id="gallery" class="page-content">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Galeri Foto</h2>
-            </div>
-            <div class="photo-gallery">
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1614332287897-cdc485fa562d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Limbah Elektronik">
-                    <div class="photo-caption">Tumpukan limbah elektronik di tempat pembuangan</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Daur Ulang">
-                    <div class="photo-caption">Proses daur ulang komponen elektronik</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pencemaran Tanah">
-                    <div class="photo-caption">Tanah yang tercemar bahan kimia dari elektronik</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pemulihan Material">
-                    <div class="photo-caption">Material berharga yang dipulihkan dari elektronik</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Komponen Berbahaya">
-                    <div class="photo-caption">Komponen elektronik mengandung bahan berbahaya</div>
-                </div>
-                <div class="photo-item">
-                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Kampanye Daur Ulang">
-                    <div class="photo-caption">Kampanye pengumpulan limbah elektronik</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Page Content -->
-    <section id="contact" class="page-content">
-        <div class="container section">
-            <div class="section-title">
-                <h2>Hubungi Kami</h2>
-            </div>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Informasi Kontak</h3>
-                    <div class="contact-details">
-                        <div class="contact-detail">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Alamat</h4>
-                                <p>Jl. Pendidikan No. 1, Bantul, Yogyakarta, Indonesia</p>
+                    <div class="flex-1">
+                        <h3 class="text-3xl font-bold text-black mb-4">ARYA SAPUTRA NUGRAHA</h3>
+                        <p class="text-lg text-gray-700 mb-4">Pelajar yang peduli lingkungan dan berkomitmen untuk mengedukasi masyarakat tentang bahaya pencemaran tanah akibat limbah elektronik.</p>
+                        
+                        <div class="grid md:grid-cols-2 gap-4 mt-6">
+                            <div class="bg-custom-cream bg-opacity-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-black mb-2">🎯 Misi</h4>
+                                <p class="text-gray-700">Meningkatkan kesadaran masyarakat tentang dampak limbah elektronik terhadap lingkungan</p>
                             </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Telepon</h4>
-                                <p>+62 123 4567 890</p>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>info@ecopedia-arya.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-detail">
-                            <i class="fas fa-clock"></i>
-                            <div>
-                                <h4>Jam Operasional</h4>
-                                <p>Senin - Jumat: 08:00 - 16:00</p>
-                                <p>Sabtu: 08:00 - 12:00</p>
+                            <div class="bg-custom-cream bg-opacity-50 p-4 rounded-lg">
+                                <h4 class="font-semibold text-black mb-2">🌱 Visi</h4>
+                                <p class="text-gray-700">Menciptakan lingkungan yang bersih dan sehat untuk generasi mendatang</p>
                             </div>
                         </div>
                     </div>
-                    <h3>Sosial Media</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Informasi Section -->
+    <section id="informasi" class="section-hidden min-h-screen py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Informasi Edukasi</h2>
+                <div class="w-24 h-1 bg-custom-blue mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-black mb-4 flex items-center">
+                        <span class="text-3xl mr-3">⚠️</span>
+                        Bahaya E-Waste
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-custom-pink mr-2">•</span>
+                            <span>Logam berat seperti timbal, merkuri, dan kadmium</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-pink mr-2">•</span>
+                            <span>Bahan kimia beracun yang meresap ke dalam tanah</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-pink mr-2">•</span>
+                            <span>Pencemaran air tanah dan sumber air bersih</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-pink mr-2">•</span>
+                            <span>Gangguan ekosistem dan rantai makanan</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold text-black mb-4 flex items-center">
+                        <span class="text-3xl mr-3">🏥</span>
+                        Dampak Kesehatan
+                    </h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-custom-blue mr-2">•</span>
+                            <span>Gangguan sistem saraf dan otak</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-blue mr-2">•</span>
+                            <span>Masalah pernapasan dan paru-paru</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-blue mr-2">•</span>
+                            <span>Gangguan pertumbuhan pada anak</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-custom-blue mr-2">•</span>
+                            <span>Risiko kanker dan penyakit kronis</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-black mb-6 text-center flex items-center justify-center">
+                    <span class="text-3xl mr-3">💡</span>
+                    Solusi dan Pencegahan
+                </h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-4 bg-custom-cream bg-opacity-30 rounded-lg">
+                        <div class="text-4xl mb-3">♻️</div>
+                        <h4 class="font-semibold text-black mb-2">Daur Ulang</h4>
+                        <p class="text-gray-700">Bawa perangkat elektronik lama ke pusat daur ulang resmi</p>
+                    </div>
+                    <div class="text-center p-4 bg-custom-cream bg-opacity-30 rounded-lg">
+                        <div class="text-4xl mb-3">🔧</div>
+                        <h4 class="font-semibold text-black mb-2">Perbaikan</h4>
+                        <p class="text-gray-700">Perbaiki perangkat yang rusak daripada langsung membuangnya</p>
+                    </div>
+                    <div class="text-center p-4 bg-custom-cream bg-opacity-30 rounded-lg">
+                        <div class="text-4xl mb-3">🎁</div>
+                        <h4 class="font-semibold text-black mb-2">Donasi</h4>
+                        <p class="text-gray-700">Sumbangkan perangkat yang masih berfungsi kepada yang membutuhkan</p>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <h3>Kirim Pesan</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" id="name" name="name" required>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="section-hidden min-h-screen py-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Video Edukasi</h2>
+                <div class="w-24 h-1 bg-custom-pink mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-custom-blue to-custom-pink h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">▶️</div>
+                            <h3 class="text-xl font-semibold">Bahaya Limbah Elektronik</h3>
+                            <p class="text-sm opacity-90">Durasi: 5 menit</p>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-semibold text-black mb-2">Dampak E-Waste terhadap Tanah</h4>
+                        <p class="text-gray-700 mb-4">Video ini menjelaskan bagaimana limbah elektronik dapat mencemari tanah dan lingkungan sekitar.</p>
+                        <button class="bg-custom-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                            Tonton Video
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-custom-pink to-yellow-400 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">▶️</div>
+                            <h3 class="text-xl font-semibold">Cara Daur Ulang E-Waste</h3>
+                            <p class="text-sm opacity-90">Durasi: 7 menit</p>
                         </div>
-                        <div class="form-group">
-                            <label for="subject">Subjek</label>
-                            <input type="text" id="subject" name="subject" required>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-semibold text-black mb-2">Panduan Daur Ulang yang Benar</h4>
+                        <p class="text-gray-700 mb-4">Pelajari langkah-langkah yang tepat untuk mendaur ulang perangkat elektronik dengan aman.</p>
+                        <button class="bg-custom-pink text-white px-4 py-2 rounded-lg hover:bg-pink-600 transition-colors">
+                            Tonton Video
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-green-400 to-custom-blue h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">▶️</div>
+                            <h3 class="text-xl font-semibold">Teknologi Ramah Lingkungan</h3>
+                            <p class="text-sm opacity-90">Durasi: 6 menit</p>
                         </div>
-                        <div class="form-group">
-                            <label for="message">Pesan</label>
-                            <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-semibold text-black mb-2">Inovasi Teknologi Hijau</h4>
+                        <p class="text-gray-700 mb-4">Mengenal teknologi terbaru yang lebih ramah lingkungan dan berkelanjutan.</p>
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            Tonton Video
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-400 to-custom-pink h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-4">▶️</div>
+                            <h3 class="text-xl font-semibold">Aksi Nyata Lingkungan</h3>
+                            <p class="text-sm opacity-90">Durasi: 4 menit</p>
                         </div>
-                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </div>
+                    <div class="p-6">
+                        <h4 class="font-semibold text-black mb-2">Gerakan Peduli Lingkungan</h4>
+                        <p class="text-gray-700 mb-4">Inspirasi aksi nyata yang bisa dilakukan untuk mengurangi dampak limbah elektronik.</p>
+                        <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                            Tonton Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Section -->
+    <section id="galeri" class="section-hidden min-h-screen py-16 bg-gray-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Galeri Foto</h2>
+                <div class="w-24 h-1 bg-custom-blue mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-red-400 to-red-600 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">🏭</div>
+                            <p class="text-sm">Pencemaran Tanah</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Dampak Limbah Elektronik</h4>
+                        <p class="text-gray-700 text-sm">Tanah yang tercemar akibat pembuangan limbah elektronik yang tidak tepat.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-custom-blue to-blue-600 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">📱</div>
+                            <p class="text-sm">E-Waste</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Tumpukan Limbah Elektronik</h4>
+                        <p class="text-gray-700 text-sm">Berbagai jenis perangkat elektronik yang menjadi limbah berbahaya.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-green-400 to-green-600 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">♻️</div>
+                            <p class="text-sm">Daur Ulang</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Proses Daur Ulang</h4>
+                        <p class="text-gray-700 text-sm">Fasilitas daur ulang elektronik yang ramah lingkungan.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-custom-pink to-pink-600 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">🌱</div>
+                            <p class="text-sm">Tanah Sehat</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Tanah yang Terjaga</h4>
+                        <p class="text-gray-700 text-sm">Contoh tanah yang terjaga kebersihannya dari limbah elektronik.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-yellow-400 to-orange-500 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">👥</div>
+                            <p class="text-sm">Edukasi</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Kegiatan Sosialisasi</h4>
+                        <p class="text-gray-700 text-sm">Kegiatan edukasi masyarakat tentang bahaya limbah elektronik.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
+                    <div class="bg-gradient-to-br from-purple-400 to-purple-600 h-48 flex items-center justify-center">
+                        <div class="text-center text-white">
+                            <div class="text-6xl mb-2">🔬</div>
+                            <p class="text-sm">Penelitian</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-semibold text-black mb-2">Penelitian Lingkungan</h4>
+                        <p class="text-gray-700 text-sm">Aktivitas penelitian dampak limbah elektronik terhadap tanah.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Alamat Section -->
+    <section id="alamat" class="section-hidden min-h-screen py-16">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Alamat</h2>
+                <div class="w-24 h-1 bg-custom-pink mx-auto"></div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-black mb-6">Lokasi ECOPEDIA</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start space-x-3">
+                                <div class="text-custom-blue text-xl">🏫</div>
+                                <div>
+                                    <h4 class="font-semibold text-black">Sekolah</h4>
+                                    <p class="text-gray-700">SMK Negeri 1 Bantul</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="text-custom-pink text-xl">📍</div>
+                                <div>
+                                    <h4 class="font-semibold text-black">Alamat Lengkap</h4>
+                                    <p class="text-gray-700">Jl. Parangtritis Km. 11, Sabdodadi, Bantul, Yogyakarta 55702</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="text-yellow-500 text-xl">🌍</div>
+                                <div>
+                                    <h4 class="font-semibold text-black">Wilayah</h4>
+                                    <p class="text-gray-700">Kabupaten Bantul, Daerah Istimewa Yogyakarta</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start space-x-3">
+                                <div class="text-green-500 text-xl">🚌</div>
+                                <div>
+                                    <h4 class="font-semibold text-black">Akses Transportasi</h4>
+                                    <p class="text-gray-700">Dapat diakses dengan bus Trans Jogja atau kendaraan pribadi</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-custom-blue via-custom-pink to-custom-cream rounded-lg p-6 text-white">
+                        <h4 class="text-xl font-bold mb-4">Peta Lokasi</h4>
+                        <div class="bg-white bg-opacity-20 rounded-lg p-8 text-center">
+                            <div class="text-6xl mb-4">🗺️</div>
+                            <p class="text-sm opacity-90">Peta interaktif lokasi SMK Negeri 1 Bantul</p>
+                            <button class="mt-4 bg-white text-custom-blue px-4 py-2 rounded-lg font-semibold hover:bg-custom-cream transition-colors">
+                                Buka di Google Maps
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-6 bg-custom-cream bg-opacity-30 rounded-lg">
+                    <h4 class="font-semibold text-black mb-3">📋 Informasi Tambahan</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                        <div>
+                            <strong>Jam Operasional:</strong><br>
+                            Senin - Jumat: 07.00 - 15.00 WIB<br>
+                            Sabtu: 07.00 - 12.00 WIB
+                        </div>
+                        <div>
+                            <strong>Fasilitas:</strong><br>
+                            Laboratorium Komputer, Perpustakaan,<br>
+                            Area Parkir, Kantin
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="section-hidden min-h-screen py-16 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-black mb-4">Kontak Person</h2>
+                <div class="w-24 h-1 bg-custom-blue mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-black mb-6">Hubungi Kami</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-custom-blue rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl">👤</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black">Nama</h4>
+                                <p class="text-gray-700">Arya Saputra Nugraha</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-custom-pink rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl">📧</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black">Email</h4>
+                                <p class="text-gray-700">arya.saputra@student.smkn1bantul.sch.id</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl">📱</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black">WhatsApp</h4>
+                                <p class="text-gray-700">+62 812-3456-7890</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl">📘</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black">Facebook</h4>
+                                <p class="text-gray-700">Arya Saputra Nugraha</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center">
+                                <span class="text-white text-xl">📷</span>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-black">Instagram</h4>
+                                <p class="text-gray-700">@arya_saputra_n</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8">
+                    <h3 class="text-2xl font-bold text-black mb-6">Kirim Pesan</h3>
+                    <p class="text-sm text-gray-600 mb-6 bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                        <strong>Demo:</strong> Form ini hanya untuk demonstrasi. Pesan tidak akan terkirim secara nyata.
+                    </p>
+                    
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Nama Lengkap</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-blue focus:border-transparent" placeholder="Masukkan nama Anda">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-blue focus:border-transparent" placeholder="Masukkan email Anda">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Subjek</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-blue focus:border-transparent" placeholder="Subjek pesan">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-black mb-2">Pesan</label>
+                            <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-custom-blue focus:border-transparent" placeholder="Tulis pesan Anda di sini..."></textarea>
+                        </div>
+                        
+                        <button type="button" onclick="showDemoAlert()" class="w-full bg-gradient-to-r from-custom-blue to-custom-pink text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all">
+                            Kirim Pesan
+                        </button>
                     </form>
                 </div>
-            </div>
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.042943981563!2d110.3267743147794!3d-7.794494179283042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sSMK%20Negeri%201%20Bantul!5e0!3m2!1sid!2sid!4v1621234567890!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Tentang ECOPEDIA</h3>
-                    <p>ECOPEDIA adalah platform edukasi tentang pencemaran tanah oleh barang elektronik yang didirikan oleh Arya Saputra Nugraha untuk meningkatkan kesadaran masyarakat tentang pentingnya pengelolaan limbah elektronik yang bertanggung jawab.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Link Cepat</h3>
-                    <a href="#" onclick="showPage('home')">Beranda</a>
-                    <a href="#" onclick="showPage('information')">Informasi</a>
-                    <a href="#" onclick="showPage('video')">Video</a>
-                    <a href="#" onclick="showPage('gallery')">Galeri</a>
-                </div>
-                <div class="footer-column">
-                    <h3>Kontak</h3>
-                    <a href="mailto:info@ecopedia-arya.com">info@ecopedia-arya.com</a>
-                    <a href="tel:+621234567890">+62 123 4567 890</a>
-                    <p>Jl. Pendidikan No. 1, Bantul, Yogyakarta</p>
-                </div>
+    <footer class="gradient-bg text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <img src="https://smkn1bantul.sch.id/logo.png" alt="Logo" class="h-8 w-8 rounded-full bg-white p-1">
+                <h3 class="text-xl font-bold">ECOPEDIA</h3>
             </div>
-            <div class="copyright">
-                <p>&copy; 2023 ECOPEDIA - Arya Saputra Nugraha. All Rights Reserved.</p>
-            </div>
+            <p class="mb-2">Edukasi Pencemaran Tanah oleh Limbah Elektronik</p>
+            <p class="text-sm opacity-90">© 2024 Arya Saputra Nugraha - SMK Negeri 1 Bantul</p>
         </div>
     </footer>
 
     <script>
-        // Function to show selected page and hide others
-        function showPage(pageId) {
-            // Hide all page contents
-            const pages = document.querySelectorAll('.page-content');
-            pages.forEach(page => {
-                page.classList.remove('active-page');
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.classList.remove('section-active');
+                section.classList.add('section-hidden');
             });
             
-            // Show selected page
-            document.getElementById(pageId).classList.add('active-page');
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            targetSection.classList.remove('section-hidden');
+            targetSection.classList.add('section-active');
+            
+            // Close mobile menu
+            document.getElementById('mobile-menu').classList.add('hidden');
             
             // Scroll to top
             window.scrollTo(0, 0);
         }
         
-        // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Terima kasih atas pesan Anda! Kami akan segera menghubungi Anda kembali.');
-            this.reset();
-        });
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
         
-        // Set home as default page
-        window.onload = function() {
-            showPage('home');
-        };
+        function showDemoAlert() {
+            alert('Demo: Terima kasih atas pesan Anda! Ini adalah form demonstrasi, pesan tidak akan terkirim secara nyata. Untuk kontak sesungguhnya, silakan gunakan informasi kontak yang tersedia.');
+        }
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuButton = event.target.closest('button');
+            
+            if (!menuButton && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
     </script>
-</body>
-    </html>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9671b8e1c79562f7',t:'MTc1Mzg0NTY0OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
