@@ -1,90 +1,879 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location Tracker</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <title>ECOPEDIA - Edukasi Pencemaran Tanah oleh Barang Elektronik</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 20px;
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        #location {
-            margin-top: 20px;
+        
+        body {
+            background-color: #f5f5f5;
+            color: #000000;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1e90ff, #ff69b4, #f5f5dc);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 60px;
+            margin-right: 15px;
+        }
+        
+        .logo-text h1 {
+            font-size: 24px;
+            color: #000;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 14px;
+            color: #000;
+        }
+        
+        /* Navigation Styles */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 144, 255, 0.8), rgba(255, 105, 180, 0.8), rgba(245, 245, 220, 0.8));
+            padding: 80px 0;
+            text-align: center;
+            color: #000;
+        }
+        
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #1e90ff;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #187bcd;
+            transform: translateY(-3px);
+        }
+        
+        /* Content Sections */
+        .section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .section-title h2 {
+            font-size: 32px;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #1e90ff, #ff69b4);
+        }
+        
+        /* Home Content */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-card i {
+            font-size: 40px;
+            color: #1e90ff;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: #1e90ff;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #ddd;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+        
+        .footer-column a:hover {
+            color: #1e90ff;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: #444;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: #1e90ff;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #444;
+        }
+        
+        /* Page Content Styles (hidden by default) */
+        .page-content {
+            display: none;
+        }
+        
+        .active-page {
+            display: block;
+        }
+        
+        /* Profile Page */
+        .profile-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-text {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        /* Information Page */
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .info-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .info-card-content {
+            padding: 20px;
+        }
+        
+        .info-card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        /* Video Page */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .video-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .video-info {
+            padding: 20px;
+        }
+        
+        /* Photo Gallery */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .photo-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            height: 250px;
+        }
+        
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .photo-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .photo-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-item:hover .photo-caption {
+            transform: translateY(0);
+        }
+        
+        /* Contact Page */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .contact-detail i {
+            margin-right: 15px;
+            color: #1e90ff;
             font-size: 20px;
         }
-        #map {
-            height: 400px;
-            width: 100%;
-            margin-top: 20px;
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        button {
-            padding: 10px 20px;
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background-color: #187bcd;
+        }
+        
+        /* Map */
+        .map-container {
+            height: 400px;
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h2 {
+                font-size: 28px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .logo img {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px;
+            }
+            
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero h2 {
+                font-size: 24px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <h1>Location Tracker</h1>
-    <button id="getLocationBtn">Get My Location</button>
-    <div id="location"></div>
-    <div id="map"></div>
+    <!-- Header Section -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="https://smkn1bantul.sch.id/logo.png" alt="ECOPEDIA Logo">
+                <div class="logo-text">
+                    <h1>ECOPEDIA</h1>
+                    <p>Arya Saputra Nugraha</p>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Beranda</a></li>
+                    <li><a href="#" onclick="showPage('profile')">Profil</a></li>
+                    <li><a href="#" onclick="showPage('information')">Informasi</a></li>
+                    <li><a href="#" onclick="showPage('video')">Video</a></li>
+                    <li><a href="#" onclick="showPage('gallery')">Galeri Foto</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Selamat Datang di ECOPEDIA</h2>
+            <p>Platform edukasi dan promosi untuk mengatasi masalah pencemaran tanah oleh barang elektronik. Mari bersama-sama menjaga bumi kita untuk generasi mendatang.</p>
+            <a href="#" class="btn" onclick="showPage('information')">Pelajari Lebih Lanjut</a>
+        </div>
+    </section>
+
+    <!-- Home Page Content -->
+    <section id="home" class="page-content active-page">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Mengapa ECOPEDIA Penting?</h2>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-recycle"></i>
+                    <h3>Daur Ulang Elektronik</h3>
+                    <p>Pelajari cara mendaur ulang limbah elektronik dengan benar untuk mengurangi pencemaran tanah.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Data Pencemaran</h3>
+                    <p>Informasi terbaru tentang dampak limbah elektronik terhadap lingkungan dan kesehatan.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hands-helping"></i>
+                    <h3>Solusi Bersama</h3>
+                    <p>Temukan cara untuk berkontribusi dalam mengurangi pencemaran tanah oleh elektronik.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Page Content -->
+    <section id="profile" class="page-content">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Profil ECOPEDIA</h2>
+            </div>
+            <div class="profile-content">
+                <div class="profile-image">
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Profil ECOPEDIA">
+                </div>
+                <div class="profile-text">
+                    <h3>Tentang Kami</h3>
+                    <p>ECOPEDIA adalah platform edukasi yang didirikan oleh Arya Saputra Nugraha dengan tujuan meningkatkan kesadaran masyarakat tentang bahaya pencemaran tanah oleh limbah elektronik dan memberikan solusi praktis untuk mengatasinya.</p>
+                    <p>Kami percaya bahwa setiap individu memiliki peran penting dalam menjaga kelestarian lingkungan. Melalui website ini, kami menyediakan informasi, tips, dan sumber daya untuk membantu masyarakat memahami dan mengambil tindakan terhadap masalah pencemaran tanah oleh barang elektronik.</p>
+                    <h3>Visi dan Misi</h3>
+                    <p><strong>Visi:</strong> Menciptakan masyarakat yang sadar dan aktif dalam mengelola limbah elektronik untuk bumi yang lebih bersih dan sehat.</p>
+                    <p><strong>Misi:</strong> Menyebarkan pengetahuan tentang dampak limbah elektronik, memberikan solusi praktis, dan membangun jaringan kolaborasi untuk pengelolaan limbah elektronik yang bertanggung jawab.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information Page Content -->
+    <section id="information" class="page-content">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Informasi Pencemaran Tanah oleh Barang Elektronik</h2>
+            </div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Dampak Limbah Elektronik">
+                    <div class="info-card-content">
+                        <h3>Dampak Limbah Elektronik pada Tanah</h3>
+                        <p>Barang elektronik mengandung berbagai bahan berbahaya seperti timbal, merkuri, kadmium, dan bahan kimia beracun lainnya yang dapat mencemari tanah ketika dibuang sembarangan.</p>
+                        <p>Pencemaran ini dapat bertahan selama puluhan tahun dan mempengaruhi ekosistem serta kesehatan manusia melalui rantai makanan.</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <img src="https://images.unsplash.com/photo-1585314062604-1a357de8b000?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Solusi Daur Ulang">
+                    <div class="info-card-content">
+                        <h3>Solusi Daur Ulang yang Tepat</h3>
+                        <p>Daur ulang elektronik yang benar dapat memulihkan hingga 95% material yang dapat digunakan kembali dan mencegah bahan berbahaya mencemari lingkungan.</p>
+                        <p>Temukan pusat daur ulang terdekat di daerah Anda dan pelajari cara memilah limbah elektronik dengan benar.</p>
+                    </div>
+                </div>
+                <div class="info-card">
+                    <img src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pencegahan Pencemaran">
+                    <div class="info-card-content">
+                        <h3>Langkah Pencegahan Pencemaran</h3>
+                        <p>1. Gunakan perangkat elektronik hingga masa pakainya habis</p>
+                        <p>2. Donasikan atau jual kembali perangkat yang masih berfungsi</p>
+                        <p>3. Gunakan layanan take-back dari produsen</p>
+                        <p>4. Bawa ke fasilitas daur ulang resmi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Page Content -->
+    <section id="video" class="page-content">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Video Edukasi</h2>
+            </div>
+            <div class="video-gallery">
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/S2lmPIa1iWE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Dampak Limbah Elektronik pada Lingkungan</h3>
+                        <p>Video ini menjelaskan bagaimana limbah elektronik dapat mencemari tanah dan air, serta dampaknya terhadap ekosistem.</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/6Q7KxL5Rk4g" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Proses Daur Ulang Barang Elektronik</h3>
+                        <p>Lihat bagaimana barang elektronik didaur ulang secara profesional untuk memulihkan material berharga dan menangani bahan berbahaya.</p>
+                    </div>
+                </div>
+                <div class="video-card">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/V44pR2x1ZkE" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Cara Mengurangi Limbah Elektronik di Rumah</h3>
+                        <p>Tips praktis untuk mengurangi limbah elektronik dari rumah Anda dan berkontribusi pada lingkungan yang lebih bersih.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Page Content -->
+    <section id="gallery" class="page-content">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Galeri Foto</h2>
+            </div>
+            <div class="photo-gallery">
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1614332287897-cdc485fa562d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Limbah Elektronik">
+                    <div class="photo-caption">Tumpukan limbah elektronik di tempat pembuangan</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Daur Ulang">
+                    <div class="photo-caption">Proses daur ulang komponen elektronik</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1557200134-90327ee9fafa?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pencemaran Tanah">
+                    <div class="photo-caption">Tanah yang tercemar bahan kimia dari elektronik</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Pemulihan Material">
+                    <div class="photo-caption">Material berharga yang dipulihkan dari elektronik</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Komponen Berbahaya">
+                    <div class="photo-caption">Komponen elektronik mengandung bahan berbahaya</div>
+                </div>
+                <div class="photo-item">
+                    <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Kampanye Daur Ulang">
+                    <div class="photo-caption">Kampanye pengumpulan limbah elektronik</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page Content -->
+    <section id="contact" class="page-content">
+        <div class="container section">
+            <div class="section-title">
+                <h2>Hubungi Kami</h2>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Informasi Kontak</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Alamat</h4>
+                                <p>Jl. Pendidikan No. 1, Bantul, Yogyakarta, Indonesia</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Telepon</h4>
+                                <p>+62 123 4567 890</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@ecopedia-arya.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Jam Operasional</h4>
+                                <p>Senin - Jumat: 08:00 - 16:00</p>
+                                <p>Sabtu: 08:00 - 12:00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>Sosial Media</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Kirim Pesan</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subjek</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Pesan</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.042943981563!2d110.3267743147794!3d-7.794494179283042!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5787bd5b6bc5%3A0x21723fd4d3684f71!2sSMK%20Negeri%201%20Bantul!5e0!3m2!1sid!2sid!4v1621234567890!5m2!1sid!2sid" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang ECOPEDIA</h3>
+                    <p>ECOPEDIA adalah platform edukasi tentang pencemaran tanah oleh barang elektronik yang didirikan oleh Arya Saputra Nugraha untuk meningkatkan kesadaran masyarakat tentang pentingnya pengelolaan limbah elektronik yang bertanggung jawab.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Link Cepat</h3>
+                    <a href="#" onclick="showPage('home')">Beranda</a>
+                    <a href="#" onclick="showPage('information')">Informasi</a>
+                    <a href="#" onclick="showPage('video')">Video</a>
+                    <a href="#" onclick="showPage('gallery')">Galeri</a>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <a href="mailto:info@ecopedia-arya.com">info@ecopedia-arya.com</a>
+                    <a href="tel:+621234567890">+62 123 4567 890</a>
+                    <p>Jl. Pendidikan No. 1, Bantul, Yogyakarta</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 ECOPEDIA - Arya Saputra Nugraha. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        let map;
-        let marker;
-
-        document.getElementById('getLocationBtn').addEventListener('click', function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(showPosition, showError);
-            } else {
-                document.getElementById('location').innerHTML = "Geolocation is not supported by this browser.";
-            }
+        // Function to show selected page and hide others
+        function showPage(pageId) {
+            // Hide all page contents
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => {
+                page.classList.remove('active-page');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active-page');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih atas pesan Anda! Kami akan segera menghubungi Anda kembali.');
+            this.reset();
         });
-
-        function showPosition(position) {
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-            document.getElementById('location').innerHTML = "Latitude: " + latitude + "<br>Longitude: " + longitude;
-
-            // Initialize the map
-            if (!map) {
-                map = L.map('map').setView([latitude, longitude], 13);
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19,
-                }).addTo(map);
-            }
-
-            // Add a marker
-            if (marker) {
-                marker.setLatLng([latitude, longitude]);
-            } else {
-                marker = L.marker([latitude, longitude]).addTo(map);
-            }
-
-            map.setView([latitude, longitude], 13);
-        }
-
-        function showError(error) {
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    document.getElementById('location').innerHTML = "User  denied the request for Geolocation.";
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    document.getElementById('location').innerHTML = "Location information is unavailable.";
-                    break;
-                case error.TIMEOUT:
-                    document.getElementById('location').innerHTML = "The request to get user location timed out.";
-                    break;
-                case error.UNKNOWN_ERROR:
-                    document.getElementById('location').innerHTML = "An unknown error occurred.";
-                    break;
-            }
-        }
+        
+        // Set home as default page
+        window.onload = function() {
+            showPage('home');
+        };
     </script>
 </body>
-</html>
+    </html>
